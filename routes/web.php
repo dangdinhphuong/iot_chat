@@ -8,6 +8,10 @@ Route::name('api')->prefix('api/')->group(function () {
     Route::get('/cate/With/Node', [ApiController::class, 'getAllWithNode'])->name('getAllWithNode');
     Route::get('/cate', [ApiController::class, 'getCate'])->name('getCate');
     Route::get('/node', [ApiController::class, 'getNode'])->name('getNode');
-    Route::post('/cate/create', [ApiController::class, 'createCategory'])->name('createCategory');
     Route::post('/node/create', [ApiController::class, 'createNode'])->name('createNode');
+
+
+    Route::post('/cate/create', [ApiController::class, 'createCategory'])->name('createCategory');
+    Route::post('/cate/{id}/update', [ApiController::class, 'updateCategory'])->name('updateCategory');
+    Route::delete('/cate/{id}/delete', [ApiController::class, 'deleteCategory'])->name('deleteCategory');
 });
