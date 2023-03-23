@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
 
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::name('api')->prefix('api/')->group(function () {
     Route::get('/cate/With/Node', [ApiController::class, 'getAllWithNode'])->name('getAllWithNode');
