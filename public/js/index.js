@@ -23,6 +23,7 @@ function callAPI(callback) {
                     var altitude_sea = "null";
                     var altitude_cm = "null";
                 }
+
                 html += /*html*/ `
                 <div class="col-xl-3 col-md-6 mb-4 " data-toggle="modal"
                                                data-target="#exampleModalCenter">
