@@ -17,10 +17,8 @@ class ApiController extends Controller
 
     public function getCate(Request $request)
     {
-       $data=['djfsdifjsdfkjgkfdgjkf'];
-        return view('SendData',compact('data'));
-//          $models = categories::get();
-//         return response()->json($models);
+          $models = categories::get();
+         return response()->json($models);
     }
 
     public function getNode(Request $request)
@@ -83,8 +81,18 @@ class ApiController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-        return response()->json( node::create($request->all()));
+
+        try {
+            \App\Models\node::create($request->all());
+            $request['status'] = $request['status'] ? 1 : 0;
+            categories::find($request['cate_id'])->update(['status'=>$request['status']]);
+        } catch (Exception $e) {
+            Log::info('[' . __FUNCTION__ . '] <[{ ' .json_encode($e). ' }]> ');
+        }
+
+        return response()->json('done');
     }
+
     public function createMultipleNode(Request $request)
     {
         $data = $request->all();

@@ -349,7 +349,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="{{asset('js/index.js')}}"></script>
-
+   <script>
+       var data = {name: "phương"};
+       var url = new URL('wss://socket-server-demo.herokuapp.com:443/controller');
+       url.searchParams.set('data', JSON.stringify(data));
+       var conn = new WebSocket(url.href);
+   </script>
 </body>
 
 </html>
