@@ -2,7 +2,8 @@
 var countSystem = 4;
 function callAPI(callback) {
     $.ajax({
-        url: "https://iot-dem-v2.000webhostapp.com/api/cate/With/Node",
+        // url: "https://iot-dem-v2.000webhostapp.com/api/cate/With/Node",
+        url: "http://127.0.0.1:8000/api/cate/With/Node",
         method: "get",
         dataType: "json",
         success: function (response) {

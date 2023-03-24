@@ -71,7 +71,7 @@
                                 <!-- Earnings (Monthly) Card Example -->
                                 <div class="col-xl-12 col-md-12 mb-4 w-100" style="height: 250px; overflow-y: scroll;">
                                     <div class="row" id='systemList'>
-                                       
+
                                     </div>
 
                                 </div>

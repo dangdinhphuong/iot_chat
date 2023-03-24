@@ -14,6 +14,7 @@ Route::name('api')->prefix('api/')->group(function () {
     Route::post('/node/create', [ApiController::class, 'createNode'])->name('createNode');
 
 
+    Route::post('/note/multiple/create', [ApiController::class, 'createMultipleNode'])->name('createMultipleNode');
     Route::post('/cate/create', [ApiController::class, 'createCategory'])->name('createCategory');
     Route::post('/cate/{id}/update', [ApiController::class, 'updateCategory'])->name('updateCategory');
     Route::delete('/cate/{id}/delete', [ApiController::class, 'deleteCategory'])->name('deleteCategory');

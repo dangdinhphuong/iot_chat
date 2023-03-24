@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\categories;
 use App\Models\node;
 use Validator;
+use App\Events\NodeEvent;
 class ApiController extends Controller
 {
     public function getAllWithNode(Request $request)
@@ -34,7 +35,7 @@ class ApiController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-        
+
         $request->status = $request->status ? 1 : 0;
         return response()->json( categories::create([
             'name'=> $request->name,
@@ -70,10 +71,10 @@ class ApiController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'cate_id' => 'required|numeric|exists:categories,id',
-            'temperature' => 'required|numeric|gt:0',
-            'pressure' => 'required|numeric|gt:0',
-            'altitude_sea' => 'required|numeric|gt:0',
-            'altitude_cm' => 'required|numeric|gt:0',
+            'temperature' => 'required|numeric',
+            'pressure' => 'required|numeric',
+            'altitude_sea' => 'required|numeric',
+            'altitude_cm' => 'required|numeric',
         ], [
             'cate_id.exists' => 'The selected cate_id is invalid.',
         ]);
@@ -81,5 +82,10 @@ class ApiController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
         return response()->json( node::create($request->all()));
+    }
+    public function createMultipleNode(Request $request)
+    {
+        $data = $request->all();
+        event(new NodeEvent($data));
     }
 }
