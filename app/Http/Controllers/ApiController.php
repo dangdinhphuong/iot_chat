@@ -69,23 +69,15 @@ class ApiController extends Controller
 
     public function createNode(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'cate_id' => 'required|numeric|exists:categories,id',
-            'temperature' => 'required|numeric',
-            'pressure' => 'required|numeric',
-            'altitude_sea' => 'required|numeric',
-            'altitude_cm' => 'required|numeric',
-        ], [
-            'cate_id.exists' => 'The selected cate_id is invalid.',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-        return response()->json( node::create($request->all()));
+        $data = $request->all();
+        event(new NodeEvent($data));
+        return response()->json($data);
     }
+
     public function createMultipleNode(Request $request)
     {
         $data = $request->all();
         event(new NodeEvent($data));
+        return response()->json($data);
     }
 }
