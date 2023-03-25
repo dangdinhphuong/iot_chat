@@ -55,6 +55,7 @@
                     <!-- Content Row -->
                     <div class="card">
                         <h5 class="card-header">Trạm</h5>
+                        <button class="btn btn-primary" onclick="loadData()">Update Data</button>
                         <div class="card-body">
                             <div class="row">
                                 <!-- Earnings (Monthly) Card Example -->

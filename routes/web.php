@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\SocketController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,4 +19,7 @@ Route::name('api')->prefix('api/')->group(function () {
     Route::post('/cate/create', [ApiController::class, 'createCategory'])->name('createCategory');
     Route::post('/cate/{id}/update', [ApiController::class, 'updateCategory'])->name('updateCategory');
     Route::delete('/cate/{id}/delete', [ApiController::class, 'deleteCategory'])->name('deleteCategory');
+    Route::post('/send-to-socket', [SocketController::class, 'sendToSocket'])->name('sendToSocket');
+
 });
+

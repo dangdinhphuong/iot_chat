@@ -52,7 +52,7 @@ function callAPISystem(callbackNode, callbackSystem) {
             }
             
             htmlSystem += /*html*/`
-                <div class="col-sm-4 d-flex flex-row">
+                <div class="col-sm-3 d-flex flex-row">
                     <div class="col mr-2">
                         <div class="h5 mb-0 font-weight-bold text-gray-800"> Tổng quan
                         </div>
@@ -69,7 +69,7 @@ function callAPISystem(callbackNode, callbackSystem) {
             `;
             
             htmlSystem += `
-            <div class="col-sm-4">
+            <div class="col-sm-5">
             <div class="card">
                 <table class="table table-striped">
                     <thead>
@@ -178,7 +178,17 @@ function generateOjb(data) {
 
 // ---------- Trạng thái các trạm ---------------
 
-
+function loadData(){
+    console.log("loadData");
+    callAPISystem(
+        function (html) {
+            nodeList.innerHTML = html;
+        },
+        function (htmlSystem) {
+            systemList.innerHTML = htmlSystem;
+        }
+    );
+}
 
 // ------------------chart-----------------------
 
@@ -281,23 +291,23 @@ createChart();
 
 // end chart
 function getChart(countStatus1 ,countStatus0){
-    var ctx = document.getElementById('myCanvas').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Hoạt động', 'Mất kết nối'],
-            datasets: [{
-                label: 'Số lượng',
-                data: [countStatus1,countStatus0],
-                backgroundColor: [
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 99, 132)'
-                ]
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
-        }
-    });
+    // var ctx = document.getElementById('myCanvas').getContext('2d');
+    // var myChart = new Chart(ctx, {
+    //     type: 'pie',
+    //     data: {
+    //         labels: ['Hoạt động', 'Mất kết nối'],
+    //         datasets: [{
+    //             label: 'Số lượng',
+    //             data: [countStatus1,countStatus0],
+    //             backgroundColor: [
+    //                 'rgb(54, 162, 235)',
+    //                 'rgb(255, 99, 132)'
+    //             ]
+    //         }]
+    //     },
+    //     options: {
+    //         responsive: true,
+    //         maintainAspectRatio: false
+    //     }
+    // });
     }
