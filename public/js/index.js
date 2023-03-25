@@ -1,15 +1,17 @@
 // System
 var countSystem = 4;
-function callAPI(callback) {
+function callAPISystem(callbackNode, callbackSystem) {
     $.ajax({
-        // url: "https://iot-dem-v2.000webhostapp.com/api/cate/With/Node",
-        url: "http://127.0.0.1:8000/api/cate/With/Node",
+        url: "https://fierce-anchorage-52786.herokuapp.com/api/cate/With/Node",
         method: "get",
         dataType: "json",
         success: function (response) {
             let data = response;
+            let countStatus0 = data.filter(item => item.status === 0).length;
+            let countStatus1 = data.filter(item => item.status === 1).length;
             console.log(data);
             var html = ``;
+            var htmlSystem = ``;
             for (let i = 0; i < data.length; i++) {
                 let latest_node = data[i].latest_node;
                 if (latest_node) {
@@ -48,22 +50,108 @@ function callAPI(callback) {
               </div>
           `;
             }
-            callback(html);
+            
+            htmlSystem += /*html*/`
+                <div class="col-sm-4 d-flex flex-row">
+                    <div class="col mr-2">
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"> Tổng quan
+                        </div>
+                        <hr>
+                        <div class="mb-2"> Tổng số trạm: <b>${data.length}</b></div>
+                        <div class="mb-2"> Hoạt động: <b>${countStatus1}</b></div>
+                        <div class="mb-2"> Mất kết nối : <b>${countStatus0}</b>
+                        </div>
+                    </div>
+                    <div style="width:150px" class="col mr-2">
+                    <canvas id="myCanvas"></canvas>
+               </div>
+                </div>
+            `;
+            
+            htmlSystem += `
+            <div class="col-sm-4">
+            <div class="card">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Trạm hoạt động</th>
+                            <th scope="col">Trạng thái</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div style="height: 200px; overflow-y: scroll;">
+                    <table class="table table-striped">
+                        <tbody>
+                        ${renderItemNode(data,1)}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-4">
+        <div class="card">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Trạm sự cố </th>
+                        <th scope="col">Trạng thái</th>
+                    </tr>
+                </thead>
+            </table>
+            <div style="height: 200px; overflow-y: scroll;">
+                <table class="table table-striped">
+                    <tbody>
+                    ${renderItemNode(data,0)}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+            `;
+            callbackNode(html);
+            callbackSystem(htmlSystem);
+            setInterval(()=>{getChart(countStatus1 ,countStatus0)},200)
         },
         error: function (xhr, status, error) {
             // Xử lý lỗi ở đây
             console.log(error);
-            callback("");
+            callbackNode("");
         }
     });
 }
 
-var row = document.getElementById('systemList');
-callAPI(function (html) {
-    row.innerHTML = html;
-});
+var nodeList = document.getElementById('nodeList');
+var systemList = document.getElementById('systemList');
+console.log(nodeList);
+console.log(systemList);
+callAPISystem(
+    function (html) {
+        nodeList.innerHTML = html;
+    },
+    function (htmlSystem) {
+        systemList.innerHTML = htmlSystem;
+    }
+);
 
-
+function renderItemNode(data,number = 1){
+    var htmlRender = ``;
+    var color = number == 1 ? "bg-success" : "bg-danger";
+    data.filter(item => item.status === number).forEach(item => {
+        // Thực hiện việc cập nhật giá trị của biến a
+        htmlRender += `
+        <tr>
+        <td>${item.name}</td>
+        <td>
+            <div class="border ${color}"
+                style="width:15px; height:15px"></div>
+        </td>      
+        </tr>
+        `;
+    });
+    return htmlRender;
+}
 
 
 function generateRandomArray() {
@@ -85,14 +173,14 @@ function generateOjb(data) {
     </div>
     <div class="mb-2"> Actual height: <b>${data.altitude_cm}</b> <b>m</b></div>
 `;
-    document.getElementById('system-'+data.cate_id).innerHTML = htmlOjb;
+    document.getElementById('system-' + data.cate_id).innerHTML = htmlOjb;
 }
 
+// ---------- Trạng thái các trạm ---------------
 
-// const row = document.getElementById('systemList');
-// row.innerHTML = callAPI();
 
-// chart
+
+// ------------------chart-----------------------
 
 var x1 = [
     '12:30',
@@ -184,9 +272,7 @@ setInterval(() => {
         x1.shift();
     }
 
-    callAPI(function (html) {
-        row.innerHTML = html;
-    });
+
     // generateOjb(generateRandomArray())
 }, 60000);
 
@@ -194,3 +280,24 @@ setInterval(() => {
 createChart();
 
 // end chart
+function getChart(countStatus1 ,countStatus0){
+    var ctx = document.getElementById('myCanvas').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Hoạt động', 'Mất kết nối'],
+            datasets: [{
+                label: 'Số lượng',
+                data: [countStatus1,countStatus0],
+                backgroundColor: [
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 99, 132)'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+    }

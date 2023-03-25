@@ -39,18 +39,7 @@
 
                     <div class="collapse navbar-collapse" id="navbarColor02">
                         <ul class="navbar-nav mr-auto">
-                            <!--                        <li class="nav-item active">-->
-                            <!--                          <a class="nav-link" href="#">PHẦN MỀM QUẢN LÝ DỮ LIỆU QUAN TRẮC TỰ ĐỘNG <span class="sr-only">(current)</span></a>-->
-                            <!--                        </li>-->
-                            <!-- <li class="nav-item">
-                          <a class="nav-link" href="#">Features</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">About</a>
-                        </li> -->
+                            {{-- System --}}
                         </ul>
                         <form class="form-inline">
                             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -70,7 +59,7 @@
                             <div class="row">
                                 <!-- Earnings (Monthly) Card Example -->
                                 <div class="col-xl-12 col-md-12 mb-4 w-100" style="height: 250px; overflow-y: scroll;">
-                                    <div class="row" id='systemList'>
+                                    <div class="row" id='nodeList'>
 
                                     </div>
 
@@ -85,194 +74,8 @@
                     <div class="card mt-2">
                         <h5 class="card-header">Trạng thái các trạm</h5>
                         <div class="card-body">
-                            <div class="row" style=" ">
-                                <div class="col-sm-4">
-                                    <div class="col mr-2">
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800"> Tổng quan
-                                        </div>
-                                        <hr>
-                                        <div class="mb-2"> Tổng số trạm: <b>60</b></div>
-                                        <div class="mb-2"> Hoạt động: <b>60</b></div>
-                                        <div class="mb-2"> Mất kết nối : <b>60</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="card">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <!--                                        <tr>-->
-                                                <!--                                            <form class="form-inline">-->
-                                                <!--                                                <th scope="col">-->
-                                                <!--                                                    <select class="form-control">-->
-                                                <!--                                                        <option>Default select</option>-->
-                                                <!--                                                    </select></th>-->
-                                                <!--                                                <th scope="col">-->
-                                                <!--                                                    <input class="form-control " type="search" placeholder="Search"-->
-                                                <!--                                                           aria-label="Search">-->
-                                                <!--                                                    &lt;!&ndash;                                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&ndash;&gt;-->
-                                                <!--                                                </th>-->
-                                                <!--                                            </form>-->
-                                                <!--                                        </tr>-->
-                                                <tr>
-                                                    <th scope="col">Trạm hoạt động</th>
-                                                    <th scope="col">Trạng thái</th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                        <div style="height: 200px; overflow-y: scroll;">
-                                            <table class="table table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>System 1</td>
-                                                        <td>
-                                                            <div class="border bg-success"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System 2</td>
-                                                        <td>
-                                                            <div class="border bg-success"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System 3</td>
-                                                        <td>
-                                                            <div class="border bg-success"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System 1</td>
-                                                        <td>
-                                                            <div class="border bg-success"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System 2</td>
-                                                        <td>
-                                                            <div class="border bg-success"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System 3</td>
-                                                        <td>
-                                                            <div class="border bg-success"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System 1</td>
-                                                        <td>
-                                                            <div class="border bg-success"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System 2</td>
-                                                        <td>
-                                                            <div class="border bg-success"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System 3</td>
-                                                        <td>
-                                                            <div class="border bg-success"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                            <div class="row " id="systemList">
 
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="card">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <!--                                        <tr>-->
-                                                <!--                                            <form class="form-inline">-->
-                                                <!--                                                <th scope="col">-->
-                                                <!--                                                    <select class="form-control">-->
-                                                <!--                                                        <option>Default select</option>-->
-                                                <!--                                                    </select></th>-->
-                                                <!--                                                <th scope="col">-->
-                                                <!--                                                    <input class="form-control " type="search" placeholder="Search"-->
-                                                <!--                                                           aria-label="Search">-->
-                                                <!--                                                    &lt;!&ndash;                                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&ndash;&gt;-->
-                                                <!--                                                </th>-->
-                                                <!--                                            </form>-->
-                                                <!--                                        </tr>-->
-                                                <tr>
-                                                    <th scope="col">Trạm sự cố </th>
-                                                    <th scope="col">Trạng thái</th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                        <div style="height: 200px; overflow-y: scroll;">
-                                            <table class="table table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>System 1</td>
-                                                        <td>
-                                                            <div class="border bg-danger"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System 1</td>
-                                                        <td>
-                                                            <div class="border bg-danger"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System 1</td>
-                                                        <td>
-                                                            <div class="border bg-danger"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System 1</td>
-                                                        <td>
-                                                            <div class="border bg-danger"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System 1</td>
-                                                        <td>
-                                                            <div class="border bg-danger"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System 1</td>
-                                                        <td>
-                                                            <div class="border bg-danger"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>System 1</td>
-                                                        <td>
-                                                            <div class="border bg-danger"
-                                                                style="width:15px; height:15px"></div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -334,27 +137,35 @@
         </div>
         <!-- End of Content Wrapper 365 323 -->
     </div>
+    <div style="width:150px">
+       
+    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script src="{{asset('js/index.js')}}"></script>
-   <script>
-       var data = {name: "phương"};
-       var url = new URL('wss://socket-server-demo.herokuapp.com:443/controller');
-       url.searchParams.set('data', JSON.stringify(data));
-       var conn = new WebSocket(url.href);
-   </script>
+    <script src="{{ asset('js/index.js') }}"></script>
+    <script>
+        var data = {
+            name: "phương"
+        };
+        var url = new URL('wss://socket-server-demo.herokuapp.com:443/controller');
+        url.searchParams.set('data', JSON.stringify(data));
+        var conn = new WebSocket(url.href);
+    </script>
+    <script>
+    </script>
 </body>
 
 </html>
