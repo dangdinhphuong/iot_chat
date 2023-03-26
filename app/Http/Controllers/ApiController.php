@@ -39,12 +39,12 @@ class ApiController extends Controller
 
     public function getAllWithNode(Request $request)
     {
-          $models = categories::with('latestNode')->get();
+          $models = categories::with('latestNode')->orderBy('id', 'ASC')->get();
          return response()->json($models);
     }
     public function getNodeByCateId(Request $request , $id )
     {     
-          $models = node::where("cate_id", $id)->orderBy('id', 'DESC')->limit(7)->get();
+          $models = node::where("cate_id", $id)->orderBy('id', 'DESC')->limit(10)->get();
          return response()->json($models);
     }
 

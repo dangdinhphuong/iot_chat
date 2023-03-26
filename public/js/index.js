@@ -1,5 +1,9 @@
 // System
 var countSystem = 4;
+let myChart1;
+var nodeList = document.getElementById('nodeList');
+var systemList = document.getElementById('systemList');
+$('#dataSytem').hide();
 function callAPISystem(callbackNode, callbackSystem) {
     $.ajax({
         url: "https://fierce-anchorage-52786.herokuapp.com/api/cate/With/Node",
@@ -9,7 +13,9 @@ function callAPISystem(callbackNode, callbackSystem) {
             let data = response;
             let countStatus0 = data.filter(item => item.status === 0).length;
             let countStatus1 = data.filter(item => item.status === 1).length;
-            console.log(data);
+            console.log(data,(countStatus0 / data.length) * 100);
+            let totalCountStatus0 =(countStatus0 / data.length) * 100;
+            let totalCountStatus1 =(countStatus1 / data.length) * 100;
             var html = ``;
             var htmlSystem = ``;
             for (let i = 0; i < data.length; i++) {
@@ -27,8 +33,7 @@ function callAPISystem(callbackNode, callbackSystem) {
                 }
 
                 html += /*html*/ `
-                <div class="col-xl-3 col-md-6 mb-4 " data-toggle="modal"
-                                               data-target="#exampleModalCenter">
+                <div class="col-xl-3 col-md-6 mb-4 " onclick="callAPIDataSystem(${data[i].id},'${data[i].name}')">
                                               <div class="card border-left-primary shadow h-100 py-2">
                                                   <div class="card-body">
                                                       <div class="row no-gutters align-items-center">
@@ -50,24 +55,38 @@ function callAPISystem(callbackNode, callbackSystem) {
               </div>
           `;
             }
-            
+
             htmlSystem += /*html*/`
                 <div class="col-sm-3 d-flex flex-row">
-                    <div class="col mr-2">
+                    <div class="col-12 mr-2 mb">
                         <div class="h5 mb-0 font-weight-bold text-gray-800"> Tổng quan
                         </div>
                         <hr>
                         <div class="mb-2"> Tổng số trạm: <b>${data.length}</b></div>
-                        <div class="mb-2"> Hoạt động: <b>${countStatus1}</b></div>
-                        <div class="mb-2"> Mất kết nối : <b>${countStatus0}</b>
+
+                        <div class="mb-2"> Hoạt động: <b>${countStatus1}<i style="float: right;">(${totalCountStatus1}%)</i></b></div>
+                        <div class="progress progress-sm mr-2 mb-2">
+                            <div class="progress-bar bg-info bg-success" role="progressbar"
+                                style="width: ${totalCountStatus1}%" aria-valuenow="50" aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
                         </div>
+
+                        <div class="mb-2"> Mất kết nối : <b>${countStatus0} <i style="float: right;">(${totalCountStatus0}%)</i></b>
+                        </div>
+                        <div class="progress progress-sm mr-2">
+                            <div class="progress-bar bg-info  bg-danger" role="progressbar"
+                                style="width: ${totalCountStatus0}%" aria-valuenow="50" aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
+                          </div>
                     </div>
                     <div style="width:150px" class="col mr-2">
                     <canvas id="myCanvas"></canvas>
                </div>
                 </div>
             `;
-            
+
             htmlSystem += `
             <div class="col-sm-5">
             <div class="card">
@@ -82,7 +101,7 @@ function callAPISystem(callbackNode, callbackSystem) {
                 <div style="height: 200px; overflow-y: scroll;">
                     <table class="table table-striped">
                         <tbody>
-                        ${renderItemNode(data,1)}
+                        ${renderItemNode(data, 1)}
                         </tbody>
                     </table>
                 </div>
@@ -102,7 +121,7 @@ function callAPISystem(callbackNode, callbackSystem) {
             <div style="height: 200px; overflow-y: scroll;">
                 <table class="table table-striped">
                     <tbody>
-                    ${renderItemNode(data,0)}
+                    ${renderItemNode(data, 0)}
                     </tbody>
                 </table>
             </div>
@@ -112,7 +131,6 @@ function callAPISystem(callbackNode, callbackSystem) {
             `;
             callbackNode(html);
             callbackSystem(htmlSystem);
-            setInterval(()=>{getChart(countStatus1 ,countStatus0)},200)
         },
         error: function (xhr, status, error) {
             // Xử lý lỗi ở đây
@@ -122,10 +140,6 @@ function callAPISystem(callbackNode, callbackSystem) {
     });
 }
 
-var nodeList = document.getElementById('nodeList');
-var systemList = document.getElementById('systemList');
-console.log(nodeList);
-console.log(systemList);
 callAPISystem(
     function (html) {
         nodeList.innerHTML = html;
@@ -135,7 +149,7 @@ callAPISystem(
     }
 );
 
-function renderItemNode(data,number = 1){
+function renderItemNode(data, number = 1) {
     var htmlRender = ``;
     var color = number == 1 ? "bg-success" : "bg-danger";
     data.filter(item => item.status === number).forEach(item => {
@@ -178,8 +192,9 @@ function generateOjb(data) {
 
 // ---------- Trạng thái các trạm ---------------
 
-function loadData(){
+function loadData() {
     console.log("loadData");
+    $('#dataSytem').hide();
     callAPISystem(
         function (html) {
             nodeList.innerHTML = html;
@@ -192,52 +207,75 @@ function loadData(){
 
 // ------------------chart-----------------------
 
-var x1 = [
-    '12:30',
-    '12:31',
-    '12:32',
-    '12:33',
-    '12:34',
-    '12:35',
-    '12:36'
-]
-var y1 = [10000, 50, 0, 60, 90, 890, 542, 6];
-var y2 = [10, 50, 10, 610, 290, 890, 542, 5];
-var y3 = [1, 50, 220, 640, 970, 890, 42, 4];
-var y4 = [];
-var labelBtn = "Temperature";
-let myChart1;
+function callAPIDataSystem(id = 1,nameNode = 'node 1') {
+    $('#dataSytem').show();
+    $('#title_stytem').text(nameNode)
+    $.ajax({
+        url: "https://fierce-anchorage-52786.herokuapp.com/api/chart/"+id,
+        method: "get",
+        dataType: "json",
+        success: function (response) {
+            let data = response;
+            console.log('data',"https://fierce-anchorage-52786.herokuapp.com/api/chart/"+id,data);
+            var charArray = {
+                temperature: [],
+                pressure: [],
+                altitude_sea: [],
+                altitude_cm: [],
+                created_at: [],
+                name: nameNode
+            };
+            for (let i = 0; i < data.length; i++) {
+                var obj = data[i];
+                charArray["temperature"].push(Number(obj.temperature));
+                charArray["pressure"].push(Number(obj.pressure));
+                charArray["altitude_sea"].push(Number(obj.altitude_sea));
+                charArray["altitude_cm"].push(Number(obj.altitude_cm));
+                charArray["created_at"].push(formatDate(obj.created_at));
+            }
+            console.log('charArray', charArray);
+            createChart(charArray);
+        },
+        error: function (xhr, status, error) {
+        }
+    });
+}
+
+function formatDate(time) {
+    const date = new Date(time);
+    return date.toISOString().replace("T", " ").slice(0, -5);
+}
 // Khởi tạo biểu đồ
-function createChart() {
+function createChart(charArray) {
     const dataMyChart1 = {
-        labels: x1,
+        labels: charArray["created_at"],
         datasets: [
             {
-                label: labelBtn + " 1",
+                label: "Temperature",
                 backgroundColor: "rgb(255, 99, 132)",
                 borderColor: "rgb(255, 99, 132)",
-                data: y1,
+                data: charArray["temperature"],
                 tension: 0.3
             },
             {
-                label: labelBtn + " 2",
+                label: "Pressure",
                 backgroundColor: "rgb(205, 0, 255)",
                 borderColor: "rgb(205, 0, 255)",
-                data: y2,
+                data: charArray["pressure"],
                 tension: 0.3
             },
             {
-                label: labelBtn + " 3",
+                label: "Altitude sea",
                 backgroundColor: "rgb(17, 144, 225)",
                 borderColor: "rgb(17, 144, 225)",
-                data: y3,
+                data: charArray["altitude_sea"],
                 tension: 0.3
             },
             {
-                label: labelBtn + " 4",
+                label: "Altitude cm",
                 backgroundColor: "rgb(129, 255, 17)",
                 borderColor: "rgb(129, 255, 17)",
-                data: y4,
+                data: charArray["altitude_cm"],
                 tension: 0.3
             },
         ],
@@ -248,11 +286,12 @@ function createChart() {
     }
     myChart1 = new Chart(document.getElementById("myChart1"), configMyChart1);
 }
+
 function updateLabel(newLabel) {
     labelBtn = newLabel;
     var count = 1
     myChart1.data.datasets.forEach((dataset) => {
-        dataset.label = labelBtn + " " + count++;
+        dataset.label = " " + count++;
         console.log(dataset.label);
     });
     myChart1.update();
@@ -267,47 +306,26 @@ function updateLabel(newLabel) {
     event.target.classList.replace("btn-secondary", "btn-primary");
 }
 // Cập nhật dữ liệu y4 sau mỗi 10 giây
-setInterval(() => {
-    myChart1.data.datasets[0].data = [Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()];
-    myChart1.data.datasets[1].data = [Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()];
-    myChart1.data.datasets[2].data = [Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()];
-    myChart1.data.datasets[3].data = [Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()];
-    myChart1.update();
-    var now = new Date();
-    var hours = now.getHours().toString().padStart(2, '0');
-    var minutes = now.getMinutes().toString().padStart(2, '0');
-    var currentTime = hours + ':' + minutes;
-    x1.push(currentTime);
-    if (x1.length > 7) {
-        x1.shift();
-    }
+// setInterval(() => {
+//     myChart1.data.datasets[0].data = [Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()];
+//     myChart1.data.datasets[1].data = [Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()];
+//     myChart1.data.datasets[2].data = [Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()];
+//     myChart1.data.datasets[3].data = [Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()];
+//     myChart1.update();
+//     var now = new Date();
+//     var hours = now.getHours().toString().padStart(2, '0');
+//     var minutes = now.getMinutes().toString().padStart(2, '0');
+//     var currentTime = hours + ':' + minutes;
+//     x1.push(currentTime);
+//     if (x1.length > 7) {
+//         x1.shift();
+//     }
 
 
-    // generateOjb(generateRandomArray())
-}, 60000);
+//     // generateOjb(generateRandomArray())
+// }, 60000);
 
 // Gọi hàm khởi tạo biểu đồ khi trang web được tải lên
-createChart();
+
 
 // end chart
-function getChart(countStatus1 ,countStatus0){
-    // var ctx = document.getElementById('myCanvas').getContext('2d');
-    // var myChart = new Chart(ctx, {
-    //     type: 'pie',
-    //     data: {
-    //         labels: ['Hoạt động', 'Mất kết nối'],
-    //         datasets: [{
-    //             label: 'Số lượng',
-    //             data: [countStatus1,countStatus0],
-    //             backgroundColor: [
-    //                 'rgb(54, 162, 235)',
-    //                 'rgb(255, 99, 132)'
-    //             ]
-    //         }]
-    //     },
-    //     options: {
-    //         responsive: true,
-    //         maintainAspectRatio: false
-    //     }
-    // });
-    }

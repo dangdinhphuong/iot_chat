@@ -41,10 +41,10 @@
                         <ul class="navbar-nav mr-auto">
                             {{-- System --}}
                         </ul>
-                        <form class="form-inline">
+                        {{-- <form class="form-inline">
                             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-                        </form>
+                        </form> --}}
                     </div>
                 </nav>
                 <!-- End of Topbar -->
@@ -80,60 +80,24 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="card mt-2" id="dataSytem">
+                        <h5 class="card-header">Dữ liệu trạm : <b id="title_stytem"></b> </h5>
+                        <div class="card-body">
+                            <div class="row ">
+                                <canvas id="myChart1"
+                                style="height: 400px!important; display: block; box-sizing: border-box; width: 1564px;"
+                                width="1564" height="400px"></canvas>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
                 <!-- /.container-fluid -->
             </div>
             <!-- End of Main Content -->
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 100%;">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">System </h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="col-xl-12 col-lg-12 col-md-12">
-                                <!-- Area Chart -->
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">
-                                            <button type="button" class="btn btn-primary"
-                                                onclick="updateLabel('Temperature')">Temperature
-                                            </button>
-                                            <button type="button" class="btn btn-secondary"
-                                                onclick="updateLabel('Humidity')">Humidity
-                                            </button>
-                                            <button type="button" class="btn btn-secondary"
-                                                onclick="updateLabel('Height above sea level')">Height above sea level
-                                            </button>
-                                            <button type="button" class="btn btn-secondary"
-                                                onclick="updateLabel('Actual height')">Actual height
-                                            </button>
-                                    </div>
-                                    <div class="card-body">
-                                        <div>
-                                            <!-- <canvas id="myAreaChart"></canvas> -->
-                                            <canvas id="myChart1"
-                                                style="height: 400px!important; display: block; box-sizing: border-box; width: 1564px;"
-                                                width="1564" height="400px"></canvas>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                        </div>
-                    </div>
-                </div>
-            </div>
+          
             <!-- End of Footer -->
         </div>
         <!-- End of Content Wrapper 365 323 -->
