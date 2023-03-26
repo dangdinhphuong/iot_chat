@@ -10,7 +10,7 @@ Route::get('/', function () {
 
 Route::name('api')->prefix('api/')->group(function () {
     Route::get('/cate/With/Node', [ApiController::class, 'getAllWithNode'])->name('getAllWithNode');
-    Route::get('/cate', [ApiController::class, 'getCate'])->name('getCate');
+    Route::post('/cate', [ApiController::class, 'getCate'])->name('getCate');
     Route::get('/node', [ApiController::class, 'getNode'])->name('getNode');
     Route::post('/node/create', [ApiController::class, 'createNode'])->name('createNode');
 
@@ -19,7 +19,9 @@ Route::name('api')->prefix('api/')->group(function () {
     Route::post('/cate/create', [ApiController::class, 'createCategory'])->name('createCategory');
     Route::post('/cate/{id}/update', [ApiController::class, 'updateCategory'])->name('updateCategory');
     Route::delete('/cate/{id}/delete', [ApiController::class, 'deleteCategory'])->name('deleteCategory');
-    Route::post('/send-to-socket', [SocketController::class, 'sendToSocket'])->name('sendToSocket');
-
+    Route::get('/chart/{id}', [ApiController::class, 'getNodeByCateId'])->name('getNodeByCateId');
+    Route::get('/chat', function () {
+        return view('SendData');
+    });
 });
 

@@ -9,16 +9,10 @@ use Validator;
 use App\Events\NodeEvent;
 class ApiController extends Controller
 {
-    public function getAllWithNode(Request $request)
-    {
-          $models = categories::with('latestNode')->get();
-         return response()->json($models);
-    }
-
     public function getCate(Request $request)
     {
           $models = categories::get();
-         return response()->json($models);
+        return response()->json($models);
     }
 
     public function getNode(Request $request)
@@ -42,6 +36,18 @@ class ApiController extends Controller
             'status'=> $request->status
         ]));
     }
+
+    public function getAllWithNode(Request $request)
+    {
+          $models = categories::with('latestNode')->get();
+         return response()->json($models);
+    }
+    public function getNodeByCateId(Request $request , $id )
+    {     
+          $models = node::where("cate_id", $id)->orderBy('id', 'DESC')->limit(7)->get();
+         return response()->json($models);
+    }
+
 
     public function updateCategory(Request $request,$id)
     {
@@ -99,8 +105,4 @@ class ApiController extends Controller
         event(new NodeEvent($data));
     }
 
-    public function connectToWebSocket($data=[])
-    {
-        return view('SendData',compact('data'));
-    }
 }
