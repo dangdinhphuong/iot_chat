@@ -215,7 +215,7 @@ function callAPIDataSystem(id = 1,nameNode = 'node 1') {
         method: "get",
         dataType: "json",
         success: function (response) {
-            let data = response;
+            let data = response.reverse();
             console.log('data',"https://fierce-anchorage-52786.herokuapp.com/api/chart/"+id,data);
             var charArray = {
                 temperature: [],
@@ -242,8 +242,11 @@ function callAPIDataSystem(id = 1,nameNode = 'node 1') {
 }
 
 function formatDate(time) {
-    const date = new Date(time);
-    return date.toISOString().replace("T", " ").slice(0, -5);
+    const date = new Date(timestamp);
+    const day = date.getDate();
+    const dayWithOrdinal = day + (day % 10 === 1 && day !== 11 ? 'st' : day % 10 === 2 && day !== 12 ? 'nd' : day % 10 === 3 && day !== 13 ? 'rd' : 'th');
+    const time = date.toLocaleTimeString('en-US', { hour12: false });
+    return `${dayWithOrdinal}  ${time}`;
 }
 // Khởi tạo biểu đồ
 function createChart(charArray) {
