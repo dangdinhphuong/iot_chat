@@ -102,5 +102,4 @@ class ApiController extends Controller
         $data = $request->all();
         event(new NodeEvent($data));
     }
-
 }
