@@ -4,7 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
+        <meta id="MetaDescription" name="DESCRIPTION" content="Bài dự thi đại diện trường Đại học Thuỷ lợi" />
+        <meta id="MetaKeywords" name="KEYWORDS" content="Bài dự thi đại diện trường Đại học Thuỷ lợi" />
+        <meta id="MetaGenerator" name="GENERATOR" content="DotNetNuke " />
+        <meta id="MetaRobots" name="ROBOTS" content="INDEX, FOLLOW" />
+        <link rel="shortcut icon" type="image/x-icon" href="http://www.tlu.edu.vn/Portals/0/2014/Logo-WRU.png" />
         <title>IOT</title>
 
         <!-- Fonts -->

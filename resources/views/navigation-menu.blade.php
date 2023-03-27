@@ -6,7 +6,9 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                        <img
+                            src="http://www.tlu.edu.vn/Portals/0/2014/Logo-WRU.png" width="30%"
+                            height="30%" class="d-inline-block align-top" alt="">
                     </a>
                 </div>
 

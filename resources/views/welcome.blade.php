@@ -7,7 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-
+    <meta id="MetaDescription" name="DESCRIPTION" content="Bài dự thi đại diện trường Đại học Thuỷ lợi" />
+    <meta id="MetaKeywords" name="KEYWORDS" content="Bài dự thi đại diện trường Đại học Thuỷ lợi" />
+    <meta id="MetaGenerator" name="GENERATOR" content="DotNetNuke " />
+    <meta id="MetaRobots" name="ROBOTS" content="INDEX, FOLLOW" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://www.tlu.edu.vn/Portals/0/2014/Logo-WRU.png" />
+</title>
     <title>IOT</title>
 
     <!-- Custom fonts for this template-->
@@ -29,8 +34,8 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
                     <a class="navbar-brand" href="#"> <img
-                            src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" width="30"
-                            height="30" class="d-inline-block align-top" alt="">
+                        src="http://www.tlu.edu.vn/Portals/0/2014/Logo-WRU.png" width="50px"
+                        height="50px" class="d-inline-block align-top" alt="">
                         Water level monitoring system in the MeKong River</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
                         aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
