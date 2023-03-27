@@ -241,8 +241,8 @@ function callAPIDataSystem(id = 1,nameNode = 'node 1') {
     });
 }
 
-function formatDate(time) {
-    const date = new Date(timestamp);
+function formatDate(datetime) {
+    const date = new Date(datetime);
     const day = date.getDate();
     const dayWithOrdinal = day + (day % 10 === 1 && day !== 11 ? 'st' : day % 10 === 2 && day !== 12 ? 'nd' : day % 10 === 3 && day !== 13 ? 'rd' : 'th');
     const time = date.toLocaleTimeString('en-US', { hour12: false });

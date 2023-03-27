@@ -54,7 +54,7 @@
                     <!-- Page Heading -->
                     <!-- Content Row -->
                     <div class="card">
-                        <h5 class="card-header">ThuyLoi UniversiTY</h5>
+                        <h5 class="card-header">ThuyLoi University</h5>
                         <button class="btn btn-primary" onclick="loadData()">Update Data</button>
                         <div class="card-body">
                             <div class="row">

@@ -20,6 +20,8 @@ class Node
             return false;
         }
         foreach($data as $item){
+            $item['status'] = $item['status'] ? 1 : 0;
+            categories::find($item['cate_id'])->update(['status'=>1]);
 
             $validator = Validator::make($item, [
                 'cate_id' => 'required|numeric|exists:categories,id',
@@ -31,8 +33,6 @@ class Node
             if (!$validator->fails()) {
                 try {
                     \App\Models\node::create($item);
-                    $item['status'] = $item['status'] ? 1 : 0;
-                    categories::find($item['cate_id'])->update(['status'=>1]);
                 } catch (Exception $e) {
                     Log::info('[' . __FUNCTION__ . '] <[{ ' .json_encode($e). ' }]> ');
                 }
