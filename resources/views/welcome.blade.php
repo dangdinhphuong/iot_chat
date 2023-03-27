@@ -31,7 +31,7 @@
                     <a class="navbar-brand" href="#"> <img
                             src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" width="30"
                             height="30" class="d-inline-block align-top" alt="">
-                        PHẦN MỀM QUẢN LÝ DỮ LIỆU QUAN TRẮC TỰ ĐỘNG </a>
+                        Water level monitoring system in the MeKong River</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
                         aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -54,7 +54,7 @@
                     <!-- Page Heading -->
                     <!-- Content Row -->
                     <div class="card">
-                        <h5 class="card-header">Trạm</h5>
+                        <h5 class="card-header">ThuyLoi UniversiTY</h5>
                         <button class="btn btn-primary" onclick="loadData()">Update Data</button>
                         <div class="card-body">
                             <div class="row">
@@ -73,7 +73,7 @@
                     </div>
 
                     <div class="card mt-2">
-                        <h5 class="card-header">Trạng thái các trạm</h5>
+                        <h5 class="card-header">Status of stations</h5>
                         <div class="card-body">
                             <div class="row " id="systemList">
 
@@ -97,13 +97,13 @@
             <!-- End of Main Content -->
 
             <!-- Modal -->
-          
+
             <!-- End of Footer -->
         </div>
         <!-- End of Content Wrapper 365 323 -->
     </div>
     <div style="width:150px">
-       
+
     </div>
 
 

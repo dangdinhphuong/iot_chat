@@ -43,12 +43,10 @@ class ApiController extends Controller
          return response()->json($models);
     }
     public function getNodeByCateId(Request $request , $id )
-    {     
+    {
           $models = node::where("cate_id", $id)->orderBy('id', 'DESC')->limit(10)->get();
          return response()->json($models);
     }
-
-
     public function updateCategory(Request $request,$id)
     {
         $categories =  categories::find($id);
@@ -91,7 +89,7 @@ class ApiController extends Controller
         try {
             \App\Models\node::create($request->all());
             $request['status'] = $request['status'] ? 1 : 0;
-            categories::find($request['cate_id'])->update(['status'=>$request['status']]);
+            categories::find($request['cate_id'])->update(['status'=>1]);
         } catch (Exception $e) {
             Log::info('[' . __FUNCTION__ . '] <[{ ' .json_encode($e). ' }]> ');
         }

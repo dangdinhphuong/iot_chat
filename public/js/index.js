@@ -43,10 +43,10 @@ function callAPISystem(callbackNode, callbackSystem) {
                                                               <hr>
                                                               <div id="system-${data[i].id}">
                                                                 <div class="mb-2"> Temperature: <b>${temperature}</b> <b>°C</b></div>
-                                                                <div class="mb-2"> Humidity: <b>${pressure}</b> <b>pa</b></div>
-                                                                <div class="mb-2"> Height above sea level: <b>${altitude_sea}</b> cm<b></b>
+                                                                <div class="mb-2"> Pressure: <b>${pressure}</b> <b>pa</b></div>
+                                                                <div class="mb-2"> Altitude_CM: <b>${altitude_cm}</b> <b>m</b></div>
+                                                                <div class="mb-2"> Altitude_SEA: <b>${altitude_sea}</b> m<b></b>
                                                                 </div>
-                                                                <div class="mb-2"> Actual height: <b>${altitude_cm}</b> <b>m</b></div>
                                                               </div>
                                                           </div>
                                                       </div>
@@ -59,12 +59,12 @@ function callAPISystem(callbackNode, callbackSystem) {
             htmlSystem += /*html*/`
                 <div class="col-sm-3 d-flex flex-row">
                     <div class="col-12 mr-2 mb">
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"> Tổng quan
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"> Overview
                         </div>
                         <hr>
-                        <div class="mb-2"> Tổng số trạm: <b>${data.length}</b></div>
+                        <div class="mb-2"> Total number of stations: <b style="font-size: 20px;">${data.length}</b></div>
 
-                        <div class="mb-2"> Hoạt động: <b>${countStatus1}<i style="float: right;">(${totalCountStatus1}%)</i></b></div>
+                        <div class="mb-2"> Operation: <b>${countStatus1}<i style="float: right;">(${totalCountStatus1}%)</i></b></div>
                         <div class="progress progress-sm mr-2 mb-2">
                             <div class="progress-bar bg-info bg-success" role="progressbar"
                                 style="width: ${totalCountStatus1}%" aria-valuenow="50" aria-valuemin="0"
@@ -72,7 +72,7 @@ function callAPISystem(callbackNode, callbackSystem) {
                             </div>
                         </div>
 
-                        <div class="mb-2"> Mất kết nối : <b>${countStatus0} <i style="float: right;">(${totalCountStatus0}%)</i></b>
+                        <div class="mb-2"> Disconect : <b>${countStatus0} <i style="float: right;">(${totalCountStatus0}%)</i></b>
                         </div>
                         <div class="progress progress-sm mr-2">
                             <div class="progress-bar bg-info  bg-danger" role="progressbar"
@@ -93,8 +93,8 @@ function callAPISystem(callbackNode, callbackSystem) {
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Trạm hoạt động</th>
-                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Operation</th>
+                            <th scope="col">Status</th>
                         </tr>
                     </thead>
                 </table>
@@ -113,8 +113,8 @@ function callAPISystem(callbackNode, callbackSystem) {
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Trạm sự cố </th>
-                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Disconect </th>
+                        <th scope="col">Status</th>
                     </tr>
                 </thead>
             </table>
@@ -158,9 +158,9 @@ function renderItemNode(data, number = 1) {
         <tr>
         <td>${item.name}</td>
         <td>
-            <div class="border ${color}"
+            <div class="border rounded-circle ${color} "
                 style="width:15px; height:15px"></div>
-        </td>      
+        </td>
         </tr>
         `;
     });
