@@ -47,7 +47,7 @@
                             {{-- System --}}
                         </ul>
                         <a class="btn btn-secondary" href="{{ route('profile.show') }}"> {{ Auth::user()->name }}</a>
-                
+
                     </div>
                 </nav>
                 <!-- End of Topbar -->
@@ -125,14 +125,7 @@
 
     <script src="{{ asset('js/index.js') }}"></script>
     <script>
-        var data = {
-            name: "phương"
-        };
-        var url = new URL('wss://socket-server-demo.herokuapp.com:443/controller');
-        url.searchParams.set('data', JSON.stringify(data));
-        var conn = new WebSocket(url.href);
-    </script>
-    <script>
+
     </script>
 </body>
 

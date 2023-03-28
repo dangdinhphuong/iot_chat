@@ -12,19 +12,9 @@
 
 <script>
     var data = {name: "phương"};
-    var url = new URL('wss://socket-server-demo.herokuapp.com:443/controller');
+    var url = new URL('wss://socket-server-demo.herokuapp.com:443');
     url.searchParams.set('data', JSON.stringify(data));
     var conn = new WebSocket(url.href);
-
-    // Gửi dữ liệu sau khi WebSocket đã kết nối
-    conn.onopen = function(event) {
-        var message = {
-            command: "groupchat",
-            message: "name",
-            channel: "global"
-        };
-        conn.send(JSON.stringify(message));
-    };
 
     // Lắng nghe các tin nhắn trả về từ server
     conn.onmessage = function(event) {

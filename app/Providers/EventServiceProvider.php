@@ -19,7 +19,8 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         \App\Events\NodeEvent::class => [
-            \App\Listeners\Multiple\Node::class,
+            \App\Listeners\Multiple\Realtime::class,
+            \App\Listeners\Multiple\Node::class
         ],
     ];
 
