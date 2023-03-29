@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="card mt-2" id="dataSytem">
-                        <h5 class="card-header">Dữ liệu trạm : <b id="title_stytem"></b> </h5>
+                        <h5 class="card-header">Data of station: <b id="title_stytem"></b> </h5>
                         <div class="card-body">
                             <div class="row ">
                                 <canvas id="myChart1"

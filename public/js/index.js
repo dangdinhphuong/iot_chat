@@ -4,6 +4,16 @@ let myChart1;
 var nodeList = document.getElementById('nodeList');
 var systemList = document.getElementById('systemList');
 var TotalData = [];
+var charArray = {
+    temperature: [],
+    pressure: [],
+    altitude_sea: [],
+    altitude_cm: [],
+    created_at: [],
+    name: '',
+    id: 0
+};
+var showChart = false;
 $('#dataSytem').hide();
 
 function callAPISystem(callbackNode) {
@@ -130,7 +140,8 @@ function loadData() {
 
 function callAPIDataSystem(id = 1, nameNode = 'node 1') {
     $('#dataSytem').show();
-    $('#title_stytem').text(nameNode)
+    $('#title_stytem').text(getName(nameNode))
+    resetChartData();
     $.ajax({
         url: "https://fierce-anchorage-52786.herokuapp.com/api/chart/" + id,
         method: "get",
@@ -138,14 +149,8 @@ function callAPIDataSystem(id = 1, nameNode = 'node 1') {
         success: function (response) {
             let data = response.reverse();
             console.log('data', "https://fierce-anchorage-52786.herokuapp.com/api/chart/" + id, data);
-            var charArray = {
-                temperature: [],
-                pressure: [],
-                altitude_sea: [],
-                altitude_cm: [],
-                created_at: [],
-                name: nameNode
-            };
+            charArray["name"] = nameNode;
+            charArray["id"] = id;
             for (let i = 0; i < data.length; i++) {
                 var obj = data[i];
                 charArray["temperature"].push(Number(obj.temperature));
@@ -153,6 +158,7 @@ function callAPIDataSystem(id = 1, nameNode = 'node 1') {
                 charArray["altitude_sea"].push(Number(obj.altitude_sea));
                 charArray["altitude_cm"].push(Number(obj.altitude_cm));
                 charArray["created_at"].push(formatDate(obj.created_at));
+                console.log(formatDate(obj.created_at));
             }
             console.log('charArray', charArray);
             createChart(charArray);
@@ -166,12 +172,14 @@ function formatDate(datetime) {
     const date = new Date(datetime);
     const day = date.getDate();
     const dayWithOrdinal = day + (day % 10 === 1 && day !== 11 ? 'st' : day % 10 === 2 && day !== 12 ? 'nd' : day % 10 === 3 && day !== 13 ? 'rd' : 'th');
-    const time = date.toLocaleTimeString('en-US', {hour12: false});
+    const time = date.toLocaleTimeString('en-US', { hour12: false });
     return `${dayWithOrdinal}  ${time}`;
 }
 
 // Khởi tạo biểu đồ
 function createChart(charArray) {
+    console.log(charArray);
+    showChart = true;
     const dataMyChart1 = {
         labels: charArray["created_at"],
         datasets: [
@@ -231,6 +239,18 @@ function updateLabel(newLabel) {
     event.target.classList.replace("btn-secondary", "btn-primary");
 }
 
+
+function resetChartData() {
+    charArray = {
+        temperature: [],
+        pressure: [],
+        altitude_sea: [],
+        altitude_cm: [],
+        created_at: [],
+        name: '',
+        id: 0
+    }
+}
 // Cập nhật dữ liệu y4 sau mỗi 10 giây
 // setInterval(() => {
 //     myChart1.data.datasets[0].data = [Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random(), Math.random()];
@@ -268,17 +288,22 @@ ws.addEventListener('open', (event) => {
 // Nhận dữ liệu từ server
 ws.addEventListener('message', (event) => {
     var datas = [];
-    if (datas = JSON.parse(event.data)) {
+
+    if (event.data == 'ping') {
+        //console.log(event.data);
+    }
+    else if (datas = JSON.parse(event.data)) {
         console.log(datas.type, datas.data);
         Promise.resolve()
             .then(() => {
-                datas.data.forEach(function(item) {
+                datas.data.forEach(function (item) {
                     const filteredNodes = TotalData.filter(node => node.id === item.cate_id);
                     if (filteredNodes.length > 0) {
                         filteredNodes.forEach(node => node.status = item.status);
                     } else {
                         console.warn(`No nodes found with id ${item.cate_id}`);
                     }
+                    changeChart(item)
                     changeDataNode(item);
                 });
             })
@@ -301,10 +326,10 @@ function changeDataNode(data) {
     var html = /*html*/ `
             <div class="mb-2"> Temperature: <b>${data.temperature}</b> <b>°C</b></div>
             <div class="mb-2"> Pressure: <b>${data.pressure}</b> <b>pa</b></div>
-            <div class="mb-2"> Altitude_SEA: <b>${data.altitude_sea}</b> m<b></b>
+            <div class="mb-2"> Altitude_SEA: <b>${data.altitude_sea}</b><b>m</b>
             <div class="mb-2"> Altitude_CM: <b>${data.altitude_cm}</b> <b>cm</b></div>
           `;
-    var systemId = document.getElementById('system-'+data.cate_id);
+    var systemId = document.getElementById('system-' + data.cate_id);
     systemId.innerHTML = html;
 }
 
@@ -387,7 +412,59 @@ function changeSystem(data) {
         </div>
     </div>
             `;
-    var systemId = document.getElementById('system-'+data.cate_id);
+    var systemId = document.getElementById('system-' + data.cate_id);
     systemList.innerHTML = htmlSystem;
 }
 
+// var array = [0,1,2,3,4,5,6,7,8,9] ;
+//  var b = 10;
+//  array.push(b);
+//  while (array.length > 10) {
+//     array.shift();
+// }
+function changeChart(data) {
+    if (showChart === true && charArray.id == data.cate_id) {
+        Promise.resolve()
+            .then(() => {
+                charArray["temperature"].push(Number(data.temperature));
+                charArray["pressure"].push(Number(data.pressure));
+                charArray["altitude_sea"].push(Number(data.altitude_sea));
+                charArray["altitude_cm"].push(Number(data.altitude_cm));
+                charArray["created_at"].push(formatDate(data.created_at));
+            })
+            .then(() => {
+                const MAX_LENGTH = 11;
+                if (charArray["temperature"].length >= MAX_LENGTH) {
+                    charArray["temperature"].shift();
+                }
+                if (charArray["pressure"].length >= MAX_LENGTH) {
+                    charArray["pressure"].shift();
+                }
+                if (charArray["altitude_sea"].length >= MAX_LENGTH) {
+                    charArray["altitude_sea"].shift();
+                }
+                if (charArray["altitude_cm"].length >= MAX_LENGTH) {
+                    charArray["altitude_cm"].shift();
+                }
+                if (charArray["created_at"].length >= MAX_LENGTH) {
+                    charArray["created_at"].shift();
+                }
+            })
+            .then(() => {
+                myChart1.data.datasets[0].data = charArray["temperature"];
+                myChart1.data.datasets[1].data = charArray["pressure"];
+                myChart1.data.datasets[2].data = charArray["altitude_sea"];
+                myChart1.data.datasets[3].data = charArray["altitude_cm"];
+                myChart1.update();
+            })
+            .catch(error => console.error(error));
+
+        console.log("charArray2", charArray);
+        console.log("charArray3", data);
+    }
+}
+
+function getName(name){
+    var number = parseInt(name.replace(/\D/g, ""));
+    return number
+}

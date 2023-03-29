@@ -14,5 +14,6 @@ class node extends Model
         "pressure",
         "altitude_sea",
         "altitude_cm",
+        "created_at"
     ];
 }
