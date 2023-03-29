@@ -166,7 +166,7 @@ function formatDate(datetime) {
     const date = new Date(datetime);
     const day = date.getDate();
     const dayWithOrdinal = day + (day % 10 === 1 && day !== 11 ? 'st' : day % 10 === 2 && day !== 12 ? 'nd' : day % 10 === 3 && day !== 13 ? 'rd' : 'th');
-    const time = date.toLocaleTimeString('en-US', { hour12: false });
+    const time = date.toLocaleTimeString('en-US', {hour12: false});
     return `${dayWithOrdinal}  ${time}`;
 }
 
@@ -272,7 +272,7 @@ ws.addEventListener('message', (event) => {
         console.log(datas.type, datas.data);
         Promise.resolve()
             .then(() => {
-                datas.data.forEach(function (item) {
+                datas.data.forEach(function(item) {
                     const filteredNodes = TotalData.filter(node => node.id === item.cate_id);
                     if (filteredNodes.length > 0) {
                         filteredNodes.forEach(node => node.status = item.status);
@@ -304,7 +304,7 @@ function changeDataNode(data) {
             <div class="mb-2"> Altitude_SEA: <b>${data.altitude_sea}</b> m<b></b>
             <div class="mb-2"> Altitude_CM: <b>${data.altitude_cm}</b> <b>cm</b></div>
           `;
-    var systemId = document.getElementById('system-' + data.cate_id);
+    var systemId = document.getElementById('system-'+data.cate_id);
     systemId.innerHTML = html;
 }
 
@@ -387,7 +387,7 @@ function changeSystem(data) {
         </div>
     </div>
             `;
-    var systemId = document.getElementById('system-' + data.cate_id);
+    var systemId = document.getElementById('system-'+data.cate_id);
     systemList.innerHTML = htmlSystem;
 }
 
