@@ -47,7 +47,7 @@
                             {{-- System --}}
                         </ul>
                         <a class="btn btn-secondary" href="{{ route('profile.show') }}"> {{ Auth::user()->name }}</a>
-
+                        <button class="btn btn-secondary ml-2" onclick="loadData()">Update Data</button>
                     </div>
                 </nav>
                 <!-- End of Topbar -->
@@ -58,7 +58,6 @@
                     <!-- Content Row -->
                     <div class="card">
                         <h5 class="card-header">ThuyLoi University</h5>
-                        <button class="btn btn-primary" onclick="loadData()">Update Data</button>
                         <div class="card-body">
                             <div class="row">
                                 <!-- Earnings (Monthly) Card Example -->

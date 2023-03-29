@@ -270,13 +270,27 @@ ws.addEventListener('message', (event) => {
     var datas = [];
     if (datas = JSON.parse(event.data)) {
         console.log(datas.type, datas.data);
-        datas.data.forEach(function(item) {
-            TotalData = TotalData.filter(node => node.id === item.cate_id).forEach(node => node.status = item.status);
-            changeDataNode(item);
-        });
-        changeSystem(TotalData)
+        Promise.resolve()
+            .then(() => {
+                datas.data.forEach(function(item) {
+                    const filteredNodes = TotalData.filter(node => node.id === item.cate_id);
+                    if (filteredNodes.length > 0) {
+                        filteredNodes.forEach(node => node.status = item.status);
+                    } else {
+                        console.warn(`No nodes found with id ${item.cate_id}`);
+                    }
+                    changeDataNode(item);
+                });
+            })
+            .then(() => {
+                if (TotalData) {
+                    changeSystem(TotalData);
+                }
+            })
+            .catch(error => console.error(error));
     }
 });
+
 
 // Bị ngắt kết nối từ server
 ws.addEventListener('close', (event) => {
