@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\SocketController;
-
-
+use Illuminate\Http\Request;
 
 Route::name('api')->prefix('api/')->group(function () {
     Route::get('/cate/With/Node', [ApiController::class, 'getAllWithNode'])->name('getAllWithNode');
@@ -22,7 +21,6 @@ Route::name('api')->prefix('api/')->group(function () {
         return view('SendData');
     });
 });
-
 
 Route::middleware([
     'auth:sanctum',
