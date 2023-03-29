@@ -140,7 +140,7 @@ function loadData() {
 
 function callAPIDataSystem(id = 1, nameNode = 'node 1') {
     $('#dataSytem').show();
-    $('#title_stytem').text(getName(nameNode))
+    $('#title_stytem').text(nameNode)
     resetChartData();
     $.ajax({
         url: "https://fierce-anchorage-52786.herokuapp.com/api/chart/" + id,

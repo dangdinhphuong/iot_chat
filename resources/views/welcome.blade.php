@@ -48,7 +48,7 @@
                             {{-- System --}}
                         </ul>
                         <a class="btn btn-secondary" href="{{ route('profile.show') }}"> {{ Auth::user()->name }}</a>
-                        <button class="btn btn-secondary ml-2" onclick="loadData()">Update Data</button>
+                        {{-- <button class="btn btn-secondary ml-2" onclick="loadData()">Update Data</button> --}}
                     </div>
                 </nav>
                 <!-- End of Topbar -->
