@@ -12,8 +12,9 @@
     <meta id="MetaGenerator" name="GENERATOR" content="DotNetNuke " />
     <meta id="MetaRobots" name="ROBOTS" content="INDEX, FOLLOW" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-</title>
+    </title>
     <title>IOT</title>
+
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css" />
@@ -34,8 +35,8 @@
                 <!-- Topbar -->
                 <nav class="border navbar navbar-expand-lg navbar-dark  bg-primary mb-5">
                     <a class="navbar-brand text-white" href="#" style="    line-height: 60px;"> <img
-                            src="http://www.tlu.edu.vn/Portals/0/2014/Logo-WRU.png" width="90"
-                            height="60" class="d-inline-block align-top" alt="">
+                            src="http://www.tlu.edu.vn/Portals/0/2014/Logo-WRU.png" width="90" height="60"
+                            class="d-inline-block align-top" alt="">
                         Water level monitoring system in the MeKong River</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
                         aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +48,7 @@
                             {{-- System --}}
                         </ul>
                         <a class="btn btn-secondary" href="{{ route('profile.show') }}"> {{ Auth::user()->name }}</a>
-                
+                        <button class="btn btn-secondary ml-2" onclick="loadData()">Update Data</button>
                     </div>
                 </nav>
                 <!-- End of Topbar -->
@@ -58,7 +59,6 @@
                     <!-- Content Row -->
                     <div class="card">
                         <h5 class="card-header">ThuyLoi University</h5>
-                        <button class="btn btn-primary" onclick="loadData()">Update Data</button>
                         <div class="card-body">
                             <div class="row">
                                 <!-- Earnings (Monthly) Card Example -->
@@ -88,22 +88,22 @@
                         <div class="card-body">
                             <div class="row ">
                                 <canvas id="myChart1"
-                                style="height: 400px!important; display: block; box-sizing: border-box; width: 1564px;"
-                                width="1564" height="400px"></canvas>
-                        </div>
+                                    style="height: 400px!important; display: block; box-sizing: border-box; width: 1564px;"
+                                    width="1564" height="400px"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /.container-fluid -->
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Modal -->
-
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
         </div>
-        <!-- End of Content Wrapper 365 323 -->
+        <!-- End of Main Content -->
+
+        <!-- Modal -->
+
+        <!-- End of Footer -->
+    </div>
+    <!-- End of Content Wrapper 365 323 -->
     </div>
     <div style="width:150px">
 
@@ -124,16 +124,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="{{ asset('js/index.js') }}"></script>
-    <script>
-        var data = {
-            name: "phương"
-        };
-        var url = new URL('wss://socket-server-demo.herokuapp.com:443/controller');
-        url.searchParams.set('data', JSON.stringify(data));
-        var conn = new WebSocket(url.href);
-    </script>
-    <script>
-    </script>
+    <script></script>
 </body>
 
 </html>
