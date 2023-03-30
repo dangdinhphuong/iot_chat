@@ -20,8 +20,7 @@ class Node
             return false;
         }
         foreach($data as $item){
-            $item['status'] = $item['status'] ? 1 : 0;
-            categories::find($item['cate_id'])->update(['status'=>1]);
+            categories::find($item['cate_id'])->update(['status'=>$item['status']]);
 
             $validator = Validator::make($item, [
                 'cate_id' => 'required|numeric|exists:categories,id',
