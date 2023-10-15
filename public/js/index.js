@@ -258,7 +258,7 @@ function updateLabel(newLabel) {
 
 // realtime
 
-const ws = new WebSocket('wss://socket-server-demo.herokuapp.com:443');
+const ws = new WebSocket('wss://hieuns-e3324e230c8a.herokuapp.com:443');
 
 // Bắt đầu kết nối với server
 ws.addEventListener('open', (event) => {

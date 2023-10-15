@@ -22,7 +22,7 @@ class SocketController extends Controller
             'timeout' => 10
         ]));
     
-        $connector('wss://socket-server-demo.herokuapp.com:443', ['protocol1', 'subprotocol2'], ['Origin' => 'http://localhost'])
+        $connector('wss://hieuns-e3324e230c8a.herokuapp.com:443', ['protocol1', 'subprotocol2'], ['Origin' => 'http://localhost'])
             ->then(function(WebSocket $conn) use ($data) {
                 // Gửi dữ liệu tới WebSocket server khi kết nối được mở
                 $conn->send($data);

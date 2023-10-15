@@ -12,7 +12,7 @@
 
 <script>
     var data = {name: "phương"};
-    var url = new URL('wss://socket-server-demo.herokuapp.com:443/controller');
+    var url = new URL('wss://hieuns-e3324e230c8a.herokuapp.com:443/controller');
     url.searchParams.set('data', JSON.stringify(data));
     var conn = new WebSocket(url.href);
 

@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Send Data to WebSocket Server</title>
 </head>
+
 <body>
-<form id="myForm">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name">
-    <button type="submit">Send</button>
-</form>
+    <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <button type="submit">Send</button>
+    </form>
 
-<script>
-    var data = {name: "phương"};
-    var url = new URL('wss://socket-server-demo.herokuapp.com:443/controller');
-    url.searchParams.set('data', JSON.stringify(data));
-    var conn = new WebSocket(url.href);
+    <script>
+        var data = { name: "phương" };
+        var url = new URL('wss://hieuns-e3324e230c8a.herokuapp.com:443/controller');
+        url.searchParams.set('data', JSON.stringify(data));
+        var conn = new WebSocket(url.href);
 
-    // Ngăn chặn hành động mặc định của form và gửi dữ liệu lên server
-    document.getElementById('myForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        var name = document.getElementById('name').value;
-        var message = {
-            command: "groupchat",
-            message: name,
-            channel: "global"
+        // Ngăn chặn hành động mặc định của form và gửi dữ liệu lên server
+        document.getElementById('myForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var name = document.getElementById('name').value;
+            var message = {
+                command: "groupchat",
+                message: name,
+                channel: "global"
+            };
+            conn.send(JSON.stringify(message));
+        });
+
+        // Lắng nghe các tin nhắn trả về từ server
+        conn.onmessage = function (event) {
+            if (event.data) {
+
+            }
+
         };
-        conn.send(JSON.stringify(message));
-    });
-
-    // Lắng nghe các tin nhắn trả về từ server
-    conn.onmessage = function(event) {
-        if(event.data){
-            
-        }
-
-    };
-</script>
+    </script>
 </body>
+
 </html>

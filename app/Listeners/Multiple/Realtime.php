@@ -23,7 +23,7 @@ class Realtime
             'timeout' => 30, // thời gian chờ kết nối
             'readTimeout' => 5 // thời gian chờ đọc
         ];
-        $client = new Client("wss://socket-server-demo.herokuapp.com:443", $options);
+        $client = new Client("wss://hieuns-e3324e230c8a.herokuapp.com:443", $options);
         $client->send($data);
         $client->close();
         return true;
