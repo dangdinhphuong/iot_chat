@@ -15,6 +15,7 @@ class SocketController extends Controller
     public function sendToSocket(Request $request)
     {
         $data = $request->all();
+        dd($data);
         // Kết nối tới WebSocket server
         $loop = app(LoopInterface::class);
         $connector = new Connector($loop, new ReactConnector([

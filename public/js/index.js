@@ -267,27 +267,31 @@ ws.addEventListener('open', (event) => {
 
 // Nhận dữ liệu từ server
 ws.addEventListener('message', (event) => {
-    var datas = [];
-    if (datas = JSON.parse(event.data)) {
+    try {
+        const datas = JSON.parse(event.data);
         console.log(datas.type, datas.data);
-        Promise.resolve()
-            .then(() => {
-                datas.data.forEach(function (item) {
-                    const filteredNodes = TotalData.filter(node => node.id === item.cate_id);
-                    if (filteredNodes.length > 0) {
-                        filteredNodes.forEach(node => node.status = item.status);
-                    } else {
-                        console.warn(`No nodes found with id ${item.cate_id}`);
-                    }
-                    changeDataNode(item);
-                });
-            })
-            .then(() => {
-                if (TotalData) {
-                    changeSystem(TotalData);
-                }
-            })
-            .catch(error => console.error(error));
+        
+        // Xử lý dữ liệu từ WebSocket
+        datas.data.forEach(function (item) {
+            const filteredNodes = TotalData.filter(node => node.id === item.cate_id);
+            if (filteredNodes.length > 0) {
+                filteredNodes.forEach(node => node.status = item.status);
+            } else {
+                console.warn(`No nodes found with id ${item.cate_id}`);
+            }
+            changeDataNode(item);
+        });
+
+        if (TotalData) {
+            changeSystem(TotalData);
+        }
+    } catch (error) {
+        if (event.data === "ping") {
+            // Xử lý khi là "ping"
+            console.log("Received ping message.");
+        } else {
+            console.error('Error processing WebSocket message:', error);
+        }
     }
 });
 
