@@ -5,10 +5,10 @@ var nodeList = document.getElementById('nodeList');
 var systemList = document.getElementById('systemList');
 var TotalData = [];
 $('#dataSytem').hide();
-
+console.log(appUrl);
 function callAPISystem(callbackNode) {
     $.ajax({
-        url: "https://fierce-anchorage-52786.herokuapp.com/api/cate/With/Node",
+        url: appUrl+"api/cate/With/Node",
         method: "get",
         dataType: "json",
         success: function (response) {
@@ -132,12 +132,12 @@ function callAPIDataSystem(id = 1, nameNode = 'node 1') {
     $('#dataSytem').show();
     $('#title_stytem').text(nameNode)
     $.ajax({
-        url: "https://fierce-anchorage-52786.herokuapp.com/api/chart/" + id,
+        url: appUrl+"api/chart/" + id,
         method: "get",
         dataType: "json",
         success: function (response) {
             let data = response.reverse();
-            console.log('data', "https://fierce-anchorage-52786.herokuapp.com/api/chart/" + id, data);
+            console.log('data', appUrl+"api/chart/" + id, data);
             var charArray = {
                 temperature: [],
                 pressure: [],
