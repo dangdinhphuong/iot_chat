@@ -209,7 +209,13 @@ function createChart(charArray) {
         type: 'line',
         data: dataMyChart1
     }
-    myChart1 = new Chart(document.getElementById("myChart1"), configMyChart1);
+    Chart.helpers.each(Chart.instances, function(instance) {
+        instance.destroy();
+    });
+    
+    // Now you can create a new chart using the canvas with ID 'myChart1'
+    var ctx = document.getElementById('myChart1').getContext('2d');
+    var newChart = new Chart(ctx, configMyChart1);
 }
 
 function updateLabel(newLabel) {
@@ -394,4 +400,3 @@ function changeSystem(data) {
     var systemId = document.getElementById('system-' + data.cate_id);
     systemList.innerHTML = htmlSystem;
 }
-
