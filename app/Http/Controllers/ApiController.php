@@ -44,7 +44,7 @@ class ApiController extends Controller
     }
     public function getNodeByCateId(Request $request , $id )
     {
-          $models = node::where("cate_id", $id)->orderBy('id', 'DESC')->limit(10)->get();
+          $models = node::where("cate_id", $id)->orderBy('id', 'DESC')->limit(20)->get();
          return response()->json($models);
     }
     public function updateCategory(Request $request,$id)
